@@ -1,10 +1,14 @@
+import EventDashboard from "../../features/dashboard/EventDashboard"
 
 
 function App() {
 
 
   return (
-    <div>revents</div>
+    <div>
+      <h1>Welcome to Revents</h1>
+      <EventDashboard />
+    </div>
     
   )
 }
