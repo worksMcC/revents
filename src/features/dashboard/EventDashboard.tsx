@@ -1,10 +1,11 @@
 import { Grid } from "semantic-ui-react";
+import EventsList from "./EventsList";
 
 export default function EventDashboard() {
   return (
     <Grid>
       <Grid.Column width={10}>
-        <h2>left</h2>
+       <EventsList />
       </Grid.Column>
       <Grid.Column width={6}>
         <h2>right</h2>
