@@ -4,17 +4,18 @@ import { AppEvent } from "../../../app/layouts/types/events";
 
 type Props ={
     event:AppEvent
+    selectEvent: (event:AppEvent) => void;
 }
 
 
 
-export default function EventListItem({event}:Props) {
+export default function EventListItem({event,selectEvent}:Props) {
   return (
     <SegmentGroup>
         <Segment>
             <ItemGroup>
                 <Item>
-                    <Item.Image size="tiny" circular src={event.hostPhotoURL} />
+                    <Item.Image size="tiny" circular src={event.hostPhotoURL || '/user.png'} />
                     <Item.Content>
                         <Item.Header>{event.title}</Item.Header>
                         <Item.Description>
@@ -39,7 +40,7 @@ export default function EventListItem({event}:Props) {
         </Segment>
         <Segment clearing>
             <span>{event.description}</span>
-            <Button color="teal" floated="right"content='veiw' />
+            <Button color="teal" floated="right"content='veiw' onClick={()=> selectEvent(event)} />
         </Segment>
     </SegmentGroup>
   )
