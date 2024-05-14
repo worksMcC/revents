@@ -4,13 +4,12 @@ import { AppEvent } from "../../../app/types/events";
 
 type Props ={
     event:AppEvent
-    selectEvent: (event:AppEvent) => void;
-    deleteEvent:(eventId:string) => void;
+ 
 }
 
 
 
-export default function EventListItem({event,selectEvent,deleteEvent}:Props) {
+export default function EventListItem({event}:Props) {
   return (
     <SegmentGroup>
         <Segment>
@@ -41,8 +40,8 @@ export default function EventListItem({event,selectEvent,deleteEvent}:Props) {
         </Segment>
         <Segment clearing>
             <span>{event.description}</span>
-            <Button color="red" floated="right"content='delete' onClick={()=> deleteEvent(event.id)} />
-            <Button color="teal" floated="right"content='veiw' onClick={()=> selectEvent(event)} />
+            <Button color="red" floated="right"content='delete' />
+            <Button color="teal" floated="right"content='veiw'  />
         </Segment>
     </SegmentGroup>
   )

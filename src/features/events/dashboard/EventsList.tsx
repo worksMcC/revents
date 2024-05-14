@@ -7,15 +7,14 @@ type Props = {
   deleteEvent : (eventId: string ) =>void;
 }
 
-export default function EventsList({events, selectEvent, deleteEvent}:Props) {
+export default function EventsList({events}:Props) {
   return (
     <>
     {events.map(event =>(
         <EventListItem 
         key={event.id}
         event={event} 
-        selectEvent={selectEvent} 
-        deleteEvent={deleteEvent}/>
+        />
     ))}
     
     </>

@@ -1,17 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
-import { AppEvent } from "../../../app/types/events";
-import { createId } from "@paralleldrive/cuid2";
 
-type Props = {
-    setFormOpen: (value: boolean) => void;
-    addEvent: (event: AppEvent)=> void;
-    selectedEvent: AppEvent | null;
-    updateEvent: (event: AppEvent)=> void;
-};
 
-export default function EventForm({ setFormOpen, addEvent, selectedEvent, updateEvent}: Props) {
-    const initialValues = selectedEvent ?? {
+export default function EventForm() {
+    const initialValues = {
         title: "",
         category: "",
         description: "",
@@ -24,9 +16,10 @@ export default function EventForm({ setFormOpen, addEvent, selectedEvent, update
     const [values, setValues] = useState(initialValues);
 
     function onSubmit(){
-        selectedEvent ? updateEvent({...selectedEvent,...values}) :
-        addEvent({...values, id: createId(), hostedBy:'bob',attendees:[], hostPhotoURL:''})
-        setFormOpen(false)
+        console.log(values)
+        // selectedEvent ? updateEvent({...selectedEvent,...values}) :
+        // addEvent({...values, id: createId(), hostedBy:'bob',attendees:[], hostPhotoURL:''})
+        // setFormOpen(false)
     }
 
     function handleInputChange(e:ChangeEvent<HTMLInputElement>){
@@ -37,7 +30,7 @@ export default function EventForm({ setFormOpen, addEvent, selectedEvent, update
  
     return (
         <Segment clearing>
-            <Header content={selectedEvent ? "Update Event" : "Create Event"} />
+            <Header content={"Create Event"} />
             <Form onSubmit={onSubmit}>
                 <Form.Field>
                     <input
@@ -94,7 +87,6 @@ export default function EventForm({ setFormOpen, addEvent, selectedEvent, update
                     floated="right"
                     positive content="Submit" />
                 <Button
-                    onClick={() => setFormOpen(false)}
                     type="submit"
                     floated="right"
                     positive
