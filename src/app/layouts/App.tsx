@@ -6,6 +6,8 @@ import HomePage from "../../features/home/HomePage";
 function App() {
   const location = useLocation();
 
+
+
   return (
     <>
       {location.pathname === '/' ? (

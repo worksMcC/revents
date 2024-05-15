@@ -1,6 +1,7 @@
 import { Button, Icon, Item, ItemGroup, List, Segment, SegmentGroup, } from "semantic-ui-react";
 import EventsListAttendee from "./EventsListAttendee";
 import { AppEvent } from "../../../app/types/events";
+import { Link } from "react-router-dom";
 
 type Props ={
     event:AppEvent
@@ -41,7 +42,7 @@ export default function EventListItem({event}:Props) {
         <Segment clearing>
             <span>{event.description}</span>
             <Button color="red" floated="right"content='delete' />
-            <Button color="teal" floated="right"content='veiw'  />
+            <Button as={Link} to={`/events/${event.id}`}color="teal" floated="right"content='veiw'  />
         </Segment>
     </SegmentGroup>
   )

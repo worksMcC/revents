@@ -1,9 +1,13 @@
 import { MenuItem, Button } from "semantic-ui-react";
 
-export default function SignOutButtons() {
+type Props ={
+  setAuth: (value:boolean) => void;
+}
+
+export default function SignOutButtons({setAuth}:Props) {
   return (
     <MenuItem position="right">
-    <Button basic inverted={true} content='Login' />
+    <Button onClick={()=>setAuth(true)}basic inverted={true} content='Login' />
     <Button basic inverted={true} content='Register' style={{ marginLeft: "1rem" }} />
   </MenuItem>
   )

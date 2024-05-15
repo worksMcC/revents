@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 
 
@@ -87,9 +88,9 @@ export default function EventForm() {
                     floated="right"
                     positive content="Submit" />
                 <Button
+                    as={Link} to='/events'
                     type="submit"
                     floated="right"
-                    positive
                     content="Cancel"
                 />
             </Form>
