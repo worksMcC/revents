@@ -1,88 +1,75 @@
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
-
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../app/store/store";
+import { createEvent, upDateEvent } from "../eventSlice";
+import { createId } from "@paralleldrive/cuid2";
+import { Field, FieldValues, useForm } from "react-hook-form";
 
 export default function EventForm() {
-    const initialValues = {
-        title: "",
-        category: "",
-        description: "",
-        city: "",
-        venue: "",
-        date: "",
-    };
+    const {register, handleSubmit, formState:{errors}} = useForm()
+     let {id} = useParams()
+    const event = useAppSelector(state =>state.events.events.find(e => e.id === id))
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    
+ 
     
 
-    const [values, setValues] = useState(initialValues);
-
-    function onSubmit(){
-        console.log(values)
-        // selectedEvent ? updateEvent({...selectedEvent,...values}) :
-        // addEvent({...values, id: createId(), hostedBy:'bob',attendees:[], hostPhotoURL:''})
-        // setFormOpen(false)
+    function onSubmit(data: FieldValues){
+        console.log(data)
+        // id = id ?? createId()
+        // event ? 
+        // dispatch(upDateEvent({...event,...values})):
+        // dispatch(createEvent({...values, id, hostedBy:'bob',attendees:[], hostPhotoURL:''}))
+        // navigate(`/events/${id}`)
     }
 
-    function handleInputChange(e:ChangeEvent<HTMLInputElement>){
-        const {name,value} = e.target
-        setValues({...values,[name]:value})
-    }
-
+    
  
     return (
         <Segment clearing>
-            <Header content={"Create Event"} />
-            <Form onSubmit={onSubmit}>
-                <Form.Field>
-                    <input
-                        type="text"
+            <Header content={event ? "updateEvent":"Create Event"} />
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <Form.Input
                         placeholder="Event title"
-                        value={values.title}
-                        name="title"
-                        onChange={(e) => handleInputChange(e)}
+                        defaultValue= {event?.title || ''}
+                        {...register('title',{required: 'This feild is required' })}
+                        error={errors.title && errors.title.message}
                     />
-                </Form.Field>
-                <Form.Field>
-                    <input
-                        type="text"
-                        placeholder="Catogory "
-                        value={values.category}
-                        name="category"
-                        onChange={(e) => handleInputChange(e)}
+              
+                <Form.Input                       
+                        placeholder="Catogory"
+                        defaultValue= {event?.category || ''}
+                        {...register('category')}
                          />
-                </Form.Field>
-                <Form.Field>
-                    <input
-                        type="text"
+                
+                <Form.Input
                         placeholder="Description" 
-                        value={values.description}
-                        name="description"
-                        onChange={(e) => handleInputChange(e)}/>
-                </Form.Field>
-                <Form.Field>
-                    <input
-                        type="text"
+                        defaultValue= {event?.description || ''}
+                        {...register('description')}
+                     />
+              
+                <Form.Input                 
                         placeholder="City"
-                        value={values.city}
-                        name="city"
-                        onChange={(e) => handleInputChange(e)}/>
-                </Form.Field>
-                <Form.Field>
-                    <input
-                        type="text"
+                        defaultValue= {event?.city || ''}
+                        {...register('city')}
+                />
+            
+                <Form.Input
                         placeholder="Venue"
-                        value={values.venue}
-                        name="venue"
-                        onChange={(e) => handleInputChange(e)}/>
-                </Form.Field>
-                <Form.Field>
-                    <input
-                        type="text"
+                        defaultValue= {event?.venue || ''}
+                        {...register('venue')}
+                  />
+      
+                <Form.Input
+                        type='date'                
                         placeholder="Date"
-                        value={values.date}
-                        name="date"
-                        onChange={(e) => handleInputChange(e)}/>
-                </Form.Field>
+                        defaultValue= {event?.date || ''}
+                        {...register('date')}
+                        />
+            
                 <Button
                     type="submit"
                     floated="right"
@@ -92,6 +79,7 @@ export default function EventForm() {
                     type="submit"
                     floated="right"
                     content="Cancel"
+
                 />
             </Form>
         </Segment>

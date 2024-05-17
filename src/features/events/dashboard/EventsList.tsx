@@ -3,8 +3,6 @@ import EventListItem from "./EventListItem";
 
 type Props = {
   events: AppEvent[]
-  selectEvent : (event: AppEvent) => void;
-  deleteEvent : (eventId: string ) =>void;
 }
 
 export default function EventsList({events}:Props) {
