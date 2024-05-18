@@ -30,6 +30,10 @@ body {
    height: 100vh;
 
   }
-
+  
+  .react-datepicker-wrapper{
+    width: 100%;
+  }
+  
 
 
